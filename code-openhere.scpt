@@ -14,7 +14,7 @@ on run {input, parameters}
         display dialog "Multiple code-workspace files found in directory."  
       end if
       on error
-          display dialog "No Finder window is open."
+        display dialog "No Finder window is open."
       end try
   end tell
 end run
