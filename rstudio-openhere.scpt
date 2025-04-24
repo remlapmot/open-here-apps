@@ -4,8 +4,7 @@ on run {input, parameters}
       set currentFolder to (folder of window 1) as alias
       set workspaceFiles to (every file of currentFolder whose name extension is "Rproj")
       if (count of workspaceFiles) = 0 then 
-        set folderPath to POSIX path of currentFolder
-        do shell script "open -n -a /Applications/RStudio.app/Contents/MacOS/RStudio " & quoted form of folderPath
+        do shell script "open -n -a RStudio"
       else if (count of workspaceFiles) = 1 then 
         set workspaceFile to item 1 of workspaceFiles
         set workspacePath to POSIX path of (workspaceFile as alias)
