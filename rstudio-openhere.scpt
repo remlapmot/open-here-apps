@@ -15,8 +15,7 @@ on run {input, parameters}
           set textFilePath to POSIX path of (textFile as alias)
           do shell script "open -n -a RStudio " & quoted form of textFilePath
         else
-          set thePath to quoted form of POSIX path of (currentFolder as alias)
-          do shell script "/Applications/RStudio.app/Contents/MacOS/RStudio " & thePath
+          display dialog "No Rproj or text files found in directory."
         end if
       else if (count of workspaceFiles) = 1 then 
         set workspaceFile to item 1 of workspaceFiles
