@@ -4,8 +4,20 @@ on run {input, parameters}
       set currentFolder to (folder of window 1) as alias
       set workspaceFiles to (every file of currentFolder whose name extension is "Rproj")
       if (count of workspaceFiles) = 0 then
-        set thePath to quoted form of POSIX path of (currentFolder as alias)
-        do shell script "/Applications/RStudio.app/Contents/MacOS/RStudio " & thePath
+        set textExtensions to {"R", "r", "Rmd", "rmd", "qmd", "md", "txt", "csv", "py", "sql", "json", "yaml", "yml", "toml"}
+        set textFiles to {}
+        repeat with ext in textExtensions
+          set matches to (every file of currentFolder whose name extension is ext)
+          set textFiles to textFiles & matches
+        end repeat
+        if (count of textFiles) > 0 then
+          set textFile to item 1 of textFiles
+          set textFilePath to POSIX path of (textFile as alias)
+          do shell script "open -n -a RStudio " & quoted form of textFilePath
+        else
+          set thePath to quoted form of POSIX path of (currentFolder as alias)
+          do shell script "/Applications/RStudio.app/Contents/MacOS/RStudio " & thePath
+        end if
       else if (count of workspaceFiles) = 1 then 
         set workspaceFile to item 1 of workspaceFiles
         set workspacePath to POSIX path of (workspaceFile as alias)
